@@ -1,0 +1,56 @@
+<form method="POST" action="/foursquare/checkin" />
+  <%= token_tag form_authenticity_token %>
+  <% unless @checkins.empty? -%>
+
+  <p>Looks like you checked in at the following venues around the same time this picture was taken. Want to upload it to one of them?</p>
+  <% @checkins.each do |checkin| -%>
+    <% venue = checkin.venue -%>
+    <input type="radio" name="checkin_id" value="<%= checkin.id -%>" />
+    <b><%= venue.name -%></b>
+    <br>
+    Address: <%= venue.location.address -%>
+    <%= venue.location.postal_code -%>
+    <%= venue.location.city -%>
+    <br>
+    Category:
+    <%= venue.categories.first.shortName -%>
+    <br>
+    Total Checkins: <%= venue.stats.checkinsCount -%>
+    Total Users: <%= venue.stats.usersCount -%>
+    Total Tips: <%= venue.stats.tipCount -%>
+    <br>
+    <hr>
+  <% end -%>
+
+<%- else -%>
+
+<p>We couldn't find existing checkin by you around the time and venue the picture was taken.
+Want to fix that? Make a checkin at one of the following venues we found around the location of the image.</p>
+
+<% @venues.each do |venue| -%>
+    <input type="radio" name="venue_id" value="<%= venue.id -%>" />
+    <b><%= venue.name -%></b>
+    <br>
+    Address: <%= venue.location.address -%>
+    <%= venue.location.postal_code -%>
+    <%= venue.location.city -%>
+    <br>
+    Category:
+    <%= venue.categories.first.shortName -%>
+    <br>
+    Total Checkins: <%= venue.stats.checkinsCount -%>
+    Total Users: <%= venue.stats.usersCount -%>
+    Total Tips: <%= venue.stats.tipCount -%>
+    <br>
+    <hr>
+  <% end -%>
+
+  <input type="checkbox" name="upload_picture" value="yes">Upload picture to the checkin?<br>
+  Have a comment?
+  <textarea name="comment"></textarea>
+
+<% end -%>
+
+  <button type="submit">Check In!</button>
+</form>
+

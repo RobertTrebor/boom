@@ -1,0 +1,6 @@
+<div class="jumbotron">
+    <h1>Where was that?</h1>
+
+    <p class="lead">Check-in with your picture or add a picture to your check-in</p>
+    <%= link_to image_tag("foursquare_connect.png"), "https://foursquare.com/oauth2/authenticate?client_id=#{AppConfig.foursquare.client_id}&response_type=code&redirect_uri=#{AppConfig.foursquare.redirect_url}" -%>
+</div>

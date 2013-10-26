@@ -1,0 +1,9 @@
+defaults:
+  foursquare:
+    client_id: MMML4YX1NRL53FIFX1E5WUSG1EWQOMXOPI3THNWBAJHNEKUK
+    client_secret: SRRSFA0N243I5GYGBBBXSOPQUMQ43XJCMW2HPAHIEUHXVVJM
+    redirect_url: http://127.0.0.1:3000/redirect
+    checkin_lookup_timeframe: 2 #hours
+    venues:
+      radius: 100
+      limit: 5

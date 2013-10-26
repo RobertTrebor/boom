@@ -1,0 +1,7 @@
+<!-- <%= session[:access_token] -%> -->
+
+<form method="POST" action="/foursquare/upload" enctype="multipart/form-data">
+  <%= token_tag form_authenticity_token %>
+  <input type="file" name="picture" />
+  <button type="submit" >Find me my checkin</button>
+</form>
