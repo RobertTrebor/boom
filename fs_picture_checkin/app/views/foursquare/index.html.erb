@@ -1,7 +1,18 @@
 <!-- <%= session[:access_token] -%> -->
 
+<p class="lead">Choose an image and we'll figure out where that was…</p>
+
 <form method="POST" action="/foursquare/upload" enctype="multipart/form-data">
   <%= token_tag form_authenticity_token %>
-  <input type="file" name="picture" />
-  <button type="submit" >Find me my checkin</button>
+  <div style="position:relative;">
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-preview thumbnail fileupload-exists" style="width: 832px; height: 624px;"></div>
+      <div>
+        <span class="btn btn-default btn-file "><span class="fileupload-new">Choose</span><span class="fileupload-exists">Change</span><input name="picture" type="file"></span>
+        <button type="submit" class="btn btn-info fileupload-exists" style="background-color: #00aeef; background-image:none; color:white">Find my check-in!</button>
+
+      </div>
+    </div>
+  </div>
+
 </form>

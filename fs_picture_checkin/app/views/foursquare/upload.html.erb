@@ -2,55 +2,44 @@
   <%= token_tag form_authenticity_token %>
   <% unless @checkins.empty? -%>
 
-  <p>Looks like you checked in at the following venues around the same time this picture was taken. Want to upload it to one of them?</p>
+  <p class="lead">Looks like you checked in at the following venues around the same time this picture was taken. Want to upload it to one of them?</p>
   <% @checkins.each do |checkin| -%>
     <% venue = checkin.venue -%>
-    <input type="radio" name="checkin_id" value="<%= checkin.id -%>" />
-    <b><%= venue.name -%></b>
+    <div>
+      <label class="radio">
+        <input type="radio" name="checkin_id" value="<%= checkin.id -%>" style="margin-top: 3px" />
+        <span style="color: #00aeef;"><b><a target="_blank" href="http://foursquare.com/v/<%= venue.id -%>"><%= venue.name -%></a></b></span>
+        <small style="color: #999999"> <%= venue.location.address -%> <%= venue.location.postal_code -%><%= venue.location.city -%> </small>
+      </label>
+    </div>
     <br>
-    Address: <%= venue.location.address -%>
-    <%= venue.location.postal_code -%>
-    <%= venue.location.city -%>
-    <br>
-    Category:
-    <%= venue.categories.first.shortName -%>
-    <br>
-    Total Checkins: <%= venue.stats.checkinsCount -%>
-    Total Users: <%= venue.stats.usersCount -%>
-    Total Tips: <%= venue.stats.tipCount -%>
-    <br>
-    <hr>
   <% end -%>
 
 <%- else -%>
 
-<p>We couldn't find existing checkin by you around the time and venue the picture was taken.
+<p class="lead">We couldn't find any existing checkin by you around the time and venue the picture was taken.
 Want to fix that? Make a checkin at one of the following venues we found around the location of the image.</p>
 
 <% @venues.each do |venue| -%>
-    <input type="radio" name="venue_id" value="<%= venue.id -%>" />
-    <b><%= venue.name -%></b>
+    <div>
+      <label class="radio">
+        <input type="radio" name="venue_id" value="<%= venue.id -%>" style="margin-top: 3px" />
+        <span style="color: #00aeef;"><b><a target="_blank" href="http://foursquare.com/v/<%= venue.id -%>"><%= venue.name -%></a></b></span>
+        <small style="color: #999999"> <%= venue.location.address -%> <%= venue.location.postal_code -%><%= venue.location.city -%> </small>
+      </label>
+    </div>
     <br>
-    Address: <%= venue.location.address -%>
-    <%= venue.location.postal_code -%>
-    <%= venue.location.city -%>
-    <br>
-    Category:
-    <%= venue.categories.first.shortName -%>
-    <br>
-    Total Checkins: <%= venue.stats.checkinsCount -%>
-    Total Users: <%= venue.stats.usersCount -%>
-    Total Tips: <%= venue.stats.tipCount -%>
-    <br>
-    <hr>
   <% end -%>
 
-  <input type="checkbox" name="upload_picture" value="yes">Upload picture to the checkin?<br>
-  Have a comment?
-  <textarea name="comment"></textarea>
+  <textarea rows="3" name="comment" placeholder="Have a comment?"></textarea>
+
+  <label class="checkbox">
+    <input type="checkbox" name="upload_picture" value="yes" />
+      Upload picture to the checkin?
+  </label>
 
 <% end -%>
-
-  <button type="submit">Check In!</button>
+  <br>
+  <input type="image" src="https://playfoursquare.s3.amazonaws.com/press/logo/checkinon-blue@2x.png" style="width: 180px; "></button>
 </form>
 
